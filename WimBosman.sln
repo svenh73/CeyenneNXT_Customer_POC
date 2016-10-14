@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{48CE66D7-6B2E-4A4B-9EB1-EE94AA743A52}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Config", "_Config", "{2F9115F1-D606-4EA9-90F1-E4E07DA19DD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WimBosman.Products.Module", "Modules\WimBosman.Products.Module\WimBosman.Products.Module.csproj", "{C6F3D3AE-66F8-4BFD-92E8-65A8D92F131D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Processes", "Processes", "{ED4A16BE-BEF8-4052-8B23-F2A8CD50AEF5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WimBosman.Process.Product", "Processes\WimBosman.Process.Product\WimBosman.Process.Product.csproj", "{C491A995-1307-4BCC-944B-7FC452CAC8DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C6F3D3AE-66F8-4BFD-92E8-65A8D92F131D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6F3D3AE-66F8-4BFD-92E8-65A8D92F131D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6F3D3AE-66F8-4BFD-92E8-65A8D92F131D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6F3D3AE-66F8-4BFD-92E8-65A8D92F131D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C491A995-1307-4BCC-944B-7FC452CAC8DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C491A995-1307-4BCC-944B-7FC452CAC8DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C491A995-1307-4BCC-944B-7FC452CAC8DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C491A995-1307-4BCC-944B-7FC452CAC8DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C6F3D3AE-66F8-4BFD-92E8-65A8D92F131D} = {48CE66D7-6B2E-4A4B-9EB1-EE94AA743A52}
+		{C491A995-1307-4BCC-944B-7FC452CAC8DF} = {ED4A16BE-BEF8-4052-8B23-F2A8CD50AEF5}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,2 @@
+﻿nuget pack Core\CeyenneNxt.Core\CeyenneNxt.Core.nuspec -OutputDirectory "C:\Diract-IT\Projecten\CeyenneNxt\NuGetSource"
+nuget pack Core\CeyenneNxt.Core\CeyenneNxt.Core.csproj -IncludeReferencedProjects -Prop Platform=AnyCPU -OutputDirectory "C:\Diract-IT\Projecten\CeyenneNxt\NuGetSource"
