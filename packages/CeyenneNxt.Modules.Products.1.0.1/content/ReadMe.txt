@@ -1,1 +1,0 @@
-﻿nuget pack Modules\CeyenneNxt.Modules.Products\CeyenneNxt.Modules.Products.nuspec -OutputDirectory "C:\Diract-IT\Projecten\CeyenneNxt\NuGetSource"

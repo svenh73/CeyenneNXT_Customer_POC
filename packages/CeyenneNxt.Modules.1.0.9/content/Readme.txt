@@ -1,2 +1,0 @@
-﻿nuget pack Deployment\CeyenneNxt.Deployment\CeyenneNxt.Modules.nuspec -OutputDirectory "C:\Diract-IT\Projecten\CeyenneNxt\NuGetSource"
-nuget pack Deployment\CeyenneNxt.Deployment\CeyenneNxt.Deployment.csproj -IncludeReferencedProjects -Prop Platform=AnyCPU -OutputDirectory "C:\Diract-IT\Projecten\CeyenneNxt\NuGetSource"
