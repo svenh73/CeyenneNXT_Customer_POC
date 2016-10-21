@@ -1,0 +1,175 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="area-top clearfix">
+            <div class="pull-left header">
+                <h3 class="title">
+                    <i class="icon-dashboard"></i>
+                    Refunds
+                </h3>
+                <h5>
+                    <span>
+                        Refunds
+                    </span>
+                </h5>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header" ng-click="isCollapsed = !isCollapsed">
+                    <span class="title"><i class="icon-warning-sign"></i>Filter</span>
+                </div>
+                <div class="box-content" uib-collapse="isCollapsed">
+                    <form class="form-horizontal fill-up validatable">
+                        <div class="padded">
+                            <div class="form-group">
+                                <label class="control-label col-lg-2">Search for customer or order</label>
+                                <div class="col-lg-10">
+                                    <input type="text" data-prompt-position="topLeft" 
+                                           ng-model="vm.filter.searchText"
+                                           ng-model-options="{ debounce: vm.searchDebounce }"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-2">Refund Status:</label>
+                                <div class="col-lg-10">
+                                    <select class="uniform" ng-model="vm.filter.refundStatusID">
+                                        <option value="">All</option>
+                                        <option ng-repeat="status in vm.refundStatuses" value="{{status.id}}">{{status.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-blue" ng-click="vm.newSearch()">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="vm.result.rows.length">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="dataTables_wrapper form-inline">
+                    <div class="table-header">
+                        <div class="dataTables_length">
+                            <label>
+                                Show
+                                <div class="selector fixedWidth">
+                                    <span ng-bind="vm.filter.pageSize"></span>
+                                    <select size="1"
+                                            ng-model="vm.filter.pageSize"
+                                            ng-change="vm.newSearch()"
+                                            ng-options="pageSize.key as pageSize.value for pageSize in vm.pageSizes">
+                                    </select>
+                                </div> entries
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-normal">
+                    <thead>
+                    <tr>
+                        <th>Refund Id</th>
+                        <th>Order</th>
+                        <th>Customer</th>
+                        <th>Payment method</th>
+                        <th>Refund amount</th>
+                        <th>Credit invoice</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="refund in vm.result.rows" class="status-info">
+                        <td>{{refund.id}}</td>
+                        <td><a href="#/orders-details/{{refund.orderID}}">{{refund.orderBackendID}}</a></td>
+                        <td><a href="#/customer-details/{{refund.customerID}}">{{refund.customerName}}</a></td>
+                        <td>{{refund.paymentMethod}}</td>
+                        <td>{{refund.amount}}</td>
+                        <td>{{refund.invoice}}</td>
+                        <td>{{refund.description}}</td>
+                        <td>
+                            <button class="btn btn-green" type="button" ng-click="vm.showHistory(refund.id)">Details</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="table-footer">
+                    <div class="dataTables_info">
+                        Showing {{(vm.result.pageNumber-1)*vm.result.pageSize + 1}}
+                        to {{(vm.result.pageNumber*vm.result.pageSize > vm.result.totalRows)?vm.result.totalRows:vm.result.pageNumber*vm.result.pageSize }}
+                        of {{vm.result.totalRows}} entries
+                    </div>
+                    <div ng-if="vm.result.totalRows > vm.result.pageSize" class="dataTables_paginate paging_full_numbers">
+                        <a ng-if="vm.result.pageNumber > 1"
+                           ng-click="vm.changePage(1)"
+                           tabindex="0" class="first paginate_button">First</a>
+                        <a ng-if="vm.result.pageNumber > 1"
+                           ng-click="vm.changePage(vm.result.pageNumber - 1)"
+                           tabindex="0" class="previous paginate_button">Previous</a>
+                        <span>
+                            <a ng-repeat="page in vm.pages" 
+                               ng-if="vm.result.pageNumber- 5 < page && page < vm.result.pageNumber + 5"
+                               ng-click="vm.changePage(page)"
+                               ng-class="(page === vm.result.pageNumber)?'paginate_active':'paginate_button'">{{page}}</a>
+                        </span>
+                        <a ng-if="vm.result.pageNumber*vm.result.pageSize < vm.result.totalRows"
+                           ng-click="vm.changePage(vm.result.pageNumber+1)"
+                           class="next paginate_button">Next</a>
+                        <a ng-if="vm.result.pageNumber*vm.result.pageSize < vm.result.totalRows"
+                           ng-click="vm.changePage(vm.pages[vm.pages.length-1])"
+                           class="last paginate_button">Last</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-6" ng-if="vm.refundStatusHistory.length > 0">
+
+            <div class="box">
+                <div class="box-header">
+                    <div class="title ceyenne-fluid">
+                        <i class="icon-list"></i> Status history - Refund ID: {{vm.refundStatusHistory[0].refundID}}
+                        <div class="btn-group">
+                            <label class="control-label col-lg-2">Status:</label>
+                            <div class="col-lg-10">
+                                <!--<select class="uniform" ng-model="vm.filter.refundStatusID">
+                                    <option value="">All</option>
+                                    <option ng-repeat="status in vm.refundStatuses" value="{{status.id}}">{{status.name}}</option>
+                                </select>-->
+                                <select class="uniform" ng-model="vm.currentRefundStatus"
+                                        ng-options="status.id as status.name for status in vm.refundStatuses"
+                                        ng-change="vm.changeRefundStatus()">                                    
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-content">
+                    <table class="table table-normal">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="statusHistory in vm.refundStatusHistory">
+                                <td>{{$index+1}}</td>
+                                <td>{{statusHistory.timestamp | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                <td>{{statusHistory.refundStatus.name}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

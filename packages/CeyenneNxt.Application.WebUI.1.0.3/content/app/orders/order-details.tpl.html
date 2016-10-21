@@ -1,0 +1,281 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="area-top clearfix">
+            <div class="pull-left header">
+                <h3 class="title">
+                    <i class="icon-dashboard"></i>
+                    Order details
+                </h3>
+                <h5 ng-if="vm.order">
+                    Order backend Id = {{vm.order.backendID}},
+                    Customer name: 
+                    <a href="" class="ceyenne-link-decorated" ng-click="vm.openCustomer(vm.order.customer.id)">
+                        {{vm.order.customer.fullName}}
+                    </a> 
+                </h5>
+            </div>
+        </div>
+    </div>
+    <!--<div class="row">
+        <div class="col-md-12 form-group">
+            <button type="button" class="btn btn-blue" ng-if="!vm.order.holdOrder" ng-click="vm.changeHoldOrder()">Hold</button>
+            <button type="button" class="btn btn-green" ng-if="vm.order.holdOrder" ng-click="vm.changeHoldOrder()">Unhold</button>
+        </div>
+    </div>-->
+    <div class="row" ng-if="vm.order && vm.order.orderLines && vm.order.orderLines.length">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <span class="title"><i class="icon-plane"></i> Order Lines</span>
+                </div>
+                <div class="box-content">
+                    <table class="table table-normal">
+                        <thead>
+                            <tr>
+                                <th>External Orderline Identifier</th>
+                                <th>Quantity Ordered</th>
+                                <th>Quantity Shipped</th>
+                                <th>External Product Identifier</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="orderLine in vm.order.orderLines">
+                                <td>{{orderLine.externalOrderLineID}}</td>
+                                <td>{{orderLine.quantity}}</td>
+                                <td>{{orderLine.quantityShipped}}</td>
+                                <td>
+                                    <a href="" class="ceyenne-link-decorated" ng-click="vm.openProduct(orderLine.externalProductIdentifier)">{{orderLine.externalProductIdentifier}}</a>
+                                </td>
+                                <td>{{orderLine.productDescription}}</td>
+                                <td>
+                                    <button class="btn btn-green" type="button" ng-click="vm.openOrderLine(orderLine.id)">Details</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box"
+                         ng-if="vm.order.history.length">
+                        <div class="box-header">
+                            <div class="title ceyenne-fluid">
+                                <i class="icon-plane"></i> Status history
+                                <div class="btn-group pull-right" ng-if="vm.possibleOrderStatuses.length">
+                                    <button class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">Change status to <span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                        <li ng-repeat="status in vm.possibleOrderStatuses">
+                                            <a href="javascript:void(0)" ng-click="$event.preventDefault(); vm.changeStatus(status.code)">
+                                                {{status.name}}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-content">
+                            <table class="table table-normal">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="statusHistory in vm.order.history">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{statusHistory.timestamp | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                        <td>{{statusHistory.status.name}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="box">
+                        <div class="box-header">
+                            <span class="title"><i class="icon-warning-sign"></i> Add refund</span>
+                        </div>
+
+                        <div class="box-content">
+
+                            <form name="refundForm" class="form-horizontal  fill-up" novalidate>
+
+                                <div class="padded">
+
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-4">Order payment method:</label>
+                                        <div class="col-lg-8">
+                                            <select class="uniform" name="paymentMethod"
+                                                    ng-model="vm.refund.paymentMethodID" ng-required="true"
+                                                    ng-options="paymentMethod.id as paymentMethod.name for paymentMethod in vm.paymentMethods"></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-4">Return code:</label>
+                                        <div class="col-lg-8">
+                                            <select class="uniform" name="returnCodeID"
+                                                    ng-model="vm.refund.returnCodeID"
+                                                    ng-required="true"
+                                                    ng-options="returnCode.id as returnCode.name for returnCode in vm.returnCodes"></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-4">Amount:</label>
+                                        <div class="col-lg-8">
+                                            <input type="number" placeholder="Enter amount to refund" name="amount"
+                                                   ng-model="vm.refund.amount"
+                                                   ng-required="true" />
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="control-label col-lg-4">Description:</label>
+                                        <div class="col-lg-8">
+                                            <textarea placeholder="Why this refund?"
+                                                      name="description"
+                                                      ng-model="vm.refund.description"
+                                                      ng-required="true"></textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-actions">
+                                    <button type="button" class="btn btn-blue"
+                                            ng-click="vm.createRefund()"
+                                            ng-disabled="refundForm.$invalid">
+                                        Save
+                                    </button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+                </div>
+            <div class="row">
+                <div class="col-md-12"
+                     ng-if="vm.order.attributeValues.length">
+                    <div class="box">
+                        <div class="box-header">
+                            <span class="title"><i class="icon-plane"></i> Attributes</span>
+                        </div>
+                        <div class="box-content">
+                            <table class="table table-normal">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="attribute in vm.order.attributeValues">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{attribute.name}}</td>
+                                        <td>{{attribute.value}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12"
+                     ng-if="vm.order.addresses.length"
+                     ng-repeat="address in vm.order.addresses">
+                    <div class="box">
+                        <div class="box-header">
+                            <span class="title"><i class="icon-plane"></i> {{address.type.name}}</span>
+                        </div>
+                        <div class="box-content">
+                            <ul class="list-group">
+                                <li class="list-group-item list-group-info">Backend Id: {{address.backendId}}</li>
+                                <li class="list-group-item list-group-info">Att: {{address.att}}</li>
+                                <li class="list-group-item list-group-info">Company: {{address.company}}</li>
+                                <li class="list-group-item list-group-info">Street: {{address.street}}</li>
+                                <li class="list-group-item list-group-info">House Number: {{address.houseNumber}}</li>
+                                <li class="list-group-item list-group-info">House Number Ext: {{address.houseNumberExt}}</li>
+                                <li class="list-group-item list-group-info">City: {{address.city}}</li>
+                                <li class="list-group-item list-group-info">Country: {{address.country.code}} - {{address.country.name}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <span class="title">Notes</span>
+                            <ul class="box-toolbar">
+                                <li>
+                                    <span class="label label-blue">{{vm.notes.length}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="box-content">
+                            <div class="box-section news with-icons" ng-repeat="note in vm.notes">
+                                <div class="avatar purple">
+                                    <i class="icon-mobile-phone icon-2x"></i>
+                                </div>
+                                <div class="news-time">
+                                    <span>{{note.createdAt| date:'dd'}}</span> {{note.createdAt| date:'MMM'}}
+                                </div>
+                                <div class="news-content">
+                                    <div class="news-title">
+                                        <a href="">{{note.subject}}</a>
+                                    </div>
+                                    <div class="news-text">{{note.details}}</div>
+                                    <div class="news-text"><strong class="indent">{{note.userName}}</strong></div>
+                                </div>
+                            </div>
+                            <form class="fill-up">
+                                <ul class="padded separate-sections">
+                                    <li class="input">
+                                        <textarea placeholder="Details" rows="6" ng-model="vm.newNote.details"></textarea>
+                                    </li>
+                                    <li class="input">
+                                        <input type="text" placeholder="Subject" ng-model="vm.newNote.subject" />
+                                    </li>
+                                    <li class="input">
+                                        <button class="btn btn-green" type="button"
+                                                ng-click="vm.createNote()"
+                                                ng-disabled="!(vm.newNote.subject.length >= 1) || !(vm.newNote.details.length >= 1)">
+                                            Add note
+                                        </button>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="vm.orderLoaded === false">
+        <div class="col-xs-12">
+            <div class="alert alert-info">
+                Order {{vm.orderID}} was not found.
+            </div>
+        </div>
+    </div>
+</div>

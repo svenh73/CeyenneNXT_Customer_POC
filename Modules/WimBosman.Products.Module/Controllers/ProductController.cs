@@ -3,7 +3,7 @@ using CeyenneNxt.Products.Shared.Interfaces;
 
 namespace WimBosman.Products.Module.Controllers
 {
-  public class ProductController : Controller, IProductUIController
+  public class ProductController : Controller, IProductController
   {
     public ActionResult Index()
     {

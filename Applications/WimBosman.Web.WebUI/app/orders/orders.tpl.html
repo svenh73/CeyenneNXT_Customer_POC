@@ -1,0 +1,161 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="area-top clearfix">
+            <div class="pull-left header">
+                <h3 class="title">
+                    <i class="icon-dashboard"></i>
+                    Orders
+                </h3>
+                <h5>
+                    <span>
+                        Order Management
+                    </span>
+                </h5>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header"  ng-click="isCollapsed = !isCollapsed">
+                    <span class="title"><i class="icon-warning-sign"></i>Filter</span>
+                </div>
+                <div class="box-content" uib-collapse="isCollapsed">
+                    <form class="form-horizontal fill-up validatable" ng-submit="vm.newSearch()">
+                        <div class="padded">
+                            <div class="form-group">
+                                <label class="control-label col-lg-2">Search by Backend Id</label>
+                                <div class="col-lg-10">
+                                    <input type="text" data-prompt-position="topLeft" 
+                                                       ng-model="vm.filter.backendId"
+                                                       ng-model-options="{ debounce: vm.searchDebounce }" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-2">Search by Customer Backend Id or Name:</label>
+                                <div class="col-lg-10">
+                                    <input type="text" data-prompt-position="topleft" 
+                                                       ng-model="vm.filter.customerBackendIDOrName"
+                                                       ng-model-options="{ debounce: vm.searchDebounce }"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-2">Status:</label>
+                                <div class="col-lg-10">
+                                    <select class="uniform" ng-model="vm.filter.orderStatus">
+                                        <option value="">All</option>
+                                        <option ng-repeat="status in vm.statusesSelect" value="{{status.name}}">{{status.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-2">Channel:</label>
+                                <div class="col-lg-10">
+                                    <select class="uniform" ng-model="vm.filter.channel">
+                                        <option value="">All</option>
+                                        <option ng-repeat="channel in vm.channels" value="{{channel}}">{{channel}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-lg-2">Type:</label>
+                                <div class="col-lg-10">
+                                    <select class="uniform" ng-model="vm.filter.typeID">
+                                        <option value="">All</option>
+                                        <option ng-repeat="type in vm.types" value="{{type.id}}">{{type.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-blue">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <!-- find me in partials/tasks_table -->
+            <div class="box" ng-if="vm.result.rows.length">
+                <div class="dataTables_wrapper form-inline">
+                    <div class="table-header">
+                        <div class="dataTables_length">
+                            <label>
+                                Show
+                                <div class="selector fixedWidth">
+                                    <span ng-bind="vm.filter.pageSize"></span>
+                                    <select size="1" name="DataTables_Table_0_length"
+                                            ng-model="vm.filter.pageSize"
+                                            ng-change="vm.newSearch()"
+                                            ng-options="value.key as value.value for value in vm.pageSizes"></select>
+                                </div> entries
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-normal">
+                    <thead>
+                    <tr>
+                        <th>Backend Id</th>
+                        <th>Created At</th>
+                        <th>Channel</th>
+                        <th>Status</th>
+                        <th>Order type</th>
+                        <th>Hold order</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="order in vm.result.rows" class="status-e"
+                        ng-class="{0:'status-info', 1:'status-pending', 2:'status-success', 3:'status-error'}[order.orderStatus]">
+                        <td>{{order.backendID}}</td>
+                        <td>
+                            <span ng-bind="order.createdAt | date:'yyyy-MM-dd HH:mm:ss'"></span></td>
+                        <td>{{order.channelIdentifier}}</td>
+                        <td>{{order.orderStatus}}</td>
+                        <td>{{order.orderType}}</td>
+                        <td>{{order.holdOrder}}</td>
+                        <td>
+                            <button class="btn btn-green" type="button" ng-click="vm.openOrder(order.id)">Details</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="table-footer">
+                    <div class="dataTables_info">
+                        Showing {{(vm.result.pageNumber-1)*vm.result.pageSize + 1}}
+                        to {{(vm.result.pageNumber*vm.result.pageSize > vm.result.totalRows)?vm.result.totalRows:vm.result.pageNumber*vm.result.pageSize }}
+                        of {{vm.result.totalRows}} entries
+                    </div>
+                    <div ng-if="vm.result.totalRows > vm.result.pageSize" class="dataTables_paginate paging_full_numbers">
+                        <a ng-if="vm.result.pageNumber > 1"
+                           ng-click="vm.changePage(1)"
+                           tabindex="0" class="first paginate_button">First</a>
+                        <a ng-if="vm.result.pageNumber > 1"
+                           ng-click="vm.changePage(vm.result.pageNumber - 1)"
+                           tabindex="0" class="previous paginate_button">Previous</a>
+                        <span>
+                            <a ng-repeat="page in vm.pages" 
+                               ng-if="vm.result.pageNumber- 5 < page && page < vm.result.pageNumber + 5"
+                               ng-click="vm.changePage(page)"
+                               ng-class="(page === vm.result.pageNumber)?'paginate_active':'paginate_button'">{{page}}</a>
+                        </span>
+                        <a ng-if="vm.result.pageNumber*vm.result.pageSize < vm.result.totalRows"
+                           ng-click="vm.changePage(vm.result.pageNumber+1)"
+                           class="next paginate_button">Next</a>
+                        <a ng-if="vm.result.pageNumber*vm.result.pageSize < vm.result.totalRows"
+                           ng-click="vm.changePage(vm.pages[vm.pages.length-1])"
+                           class="last paginate_button">Last</a>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-info" ng-if="!vm.result.rows.length">
+                No orders found.
+            </div>
+        </div>
+    </div>
+</div>

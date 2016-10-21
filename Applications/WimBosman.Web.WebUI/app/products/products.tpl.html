@@ -1,0 +1,129 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="area-top clearfix">
+            <div class="pull-left header">
+                <h3 class="title">
+                    <i class="icon-dashboard"></i>
+                    Products
+                </h3>
+                <h5>
+                    <span>
+                        Product Management
+                    </span>
+                </h5>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header" ng-click="isCollapsed = !isCollapsed">
+                    <span class="title"><i class="icon-warning-sign"></i>Filter</span>
+                </div>
+                <div class="box-content" uib-collapse="isCollapsed">
+                    <form class="form-horizontal fill-up validatable" ng-submit="vm.newSearch()">
+                        <div class="padded">
+                            <div class="form-group">
+                                <label class="control-label col-lg-2">Search by Product Id or Name</label>
+                                <div class="col-lg-10">
+                                    <input type="text" data-prompt-position="topLeft" ng-model="vm.filter.nameOrSKU"
+                                           ng-model-options="{ debounce: vm.searchDebounce }" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-blue">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Disabled for now. First Version will be with button for search. Because there are issues that must be resolved for the autosearch to run properly-->
+    <!--<div class="row separate-sections">
+        <input type="text" class="ceyenne-fluid" 
+                placeholder="Type product Id or Name to find a product..."
+                data-prompt-position="topLeft"
+                ng-model="vm.filter.nameOrSKU"
+                ng-model-options="{ debounce: vm.searchDebounce }" />
+    </div>-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box" ng-if="vm.result.rows.length">
+                <div class="dataTables_wrapper form-inline">
+                    <div class="table-header">
+                        <div class="dataTables_length">
+                            <label>
+                                Show
+                                <div class="selector fixedWidth">
+                                    <span ng-bind="vm.filter.pageSize"></span>
+                                    <select size="1"
+                                            ng-model="vm.filter.pageSize"
+                                            ng-change="vm.newSearch()"
+                                            ng-options="value.key as value.value for value in vm.pageSizes"></select>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-normal">
+                    <thead>
+                        <tr>
+                            <th>Product ID</th>
+                            <th>Product name</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Licensee</th>
+                            <th>Exclusive</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="product in vm.result.rows" class="status-e">
+                            <td>{{product.sku}}</td>
+                            <td>{{product.name}}</td>
+                            <td>{{product.description}}</td>
+                            <td>{{product.category}}</td>
+                            <td>{{product.licensee}}</td>
+                            <td>{{product.companyCode}}</td>
+                            <td>
+                                <button class="btn btn-green" type="button" ng-click="vm.openProduct(product.sku)">Details</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="table-footer">
+                    <div class="dataTables_info">
+                        Showing {{(vm.result.pageNumber-1)*vm.result.pageSize + 1}}
+                        to {{(vm.result.pageNumber*vm.result.pageSize > vm.result.totalRows)?vm.result.totalRows:vm.result.pageNumber*vm.result.pageSize }}
+                        of {{vm.result.totalRows}} entries
+                    </div>
+                    <!--TODO: extract the paging as common functionality-->
+                    <div ng-if="vm.result.totalRows > vm.result.pageSize" class="dataTables_paginate paging_full_numbers">
+                        <a ng-if="vm.result.pageNumber > 1"
+                           ng-click="vm.changePage(1)"
+                           tabindex="0" class="first paginate_button">First</a>
+                        <a ng-if="vm.result.pageNumber > 1"
+                           ng-click="vm.changePage(vm.result.pageNumber - 1)"
+                           tabindex="0" class="previous paginate_button">Previous</a>
+                        <span>
+                            <a ng-repeat="page in vm.pages"
+                               ng-if="vm.result.pageNumber- 5 < page && page < vm.result.pageNumber + 5"
+                               ng-click="vm.changePage(page)"
+                               ng-class="(page === vm.result.pageNumber)?'paginate_active':'paginate_button'">{{page}}</a>
+                        </span>
+                        <a ng-if="vm.result.pageNumber*vm.result.pageSize < vm.result.totalRows"
+                           ng-click="vm.changePage(vm.result.pageNumber+1)"
+                           class="next paginate_button">Next</a>
+                        <a ng-if="vm.result.pageNumber*vm.result.pageSize < vm.result.totalRows"
+                           ng-click="vm.changePage(vm.pages[vm.pages.length-1])"
+                           class="last paginate_button">Last</a>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-info" ng-if="!vm.result.rows.length">
+                No products found.
+            </div>
+        </div>
+    </div>
+</div>

@@ -28,7 +28,7 @@ namespace WimBosman.Products.Module
           }
         case ApplicationType.WebUI:
           {
-            container.Register<IProductUIController, CeyenneNxt.Products.Module.Controllers.ProductController>(lifeStyle);
+            container.Register<IProductController, CeyenneNxt.Products.Module.Controllers.ProductController>(lifeStyle);
             break;
           }
       }

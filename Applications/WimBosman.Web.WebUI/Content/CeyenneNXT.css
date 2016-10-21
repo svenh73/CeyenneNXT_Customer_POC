@@ -1,0 +1,42 @@
+﻿.ceyenne-body {
+    min-width: 650px;
+    overflow:auto;
+}
+
+.ceyenne-fluid {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.modal-dialog.modal-ceyenne {
+    width: auto !important;
+    display: inline-block !important;
+    position: absolute !important;
+    left: 50% !important;
+    transform: translate(-50%, 0) !important;
+}
+
+.modal-body .box.order-details {
+    float: left !important;
+    margin-right: 20px;
+}
+
+.order-line-status-quantity {
+    float: left !important;
+}
+
+.ceyenne-left-margin-md {
+    margin-left: 15px;
+}
+
+.ceyenne-top-margin {
+    margin-top: 15px;
+} 
+
+a.ceyenne-link-decorated {
+    text-decoration: underline !important;
+}
+
+a.ceyenne-link-decorated:hover {
+    text-decoration: none !important;
+}

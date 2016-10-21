@@ -1,0 +1,140 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="area-top clearfix">
+            <div class="pull-left header">
+                <h3 class="title">
+                    <i class="icon-dashboard"></i>
+                    Customer details
+                </h3>
+                <h5 ng-if="vm.customer">
+                    <span>
+                        Customer id = {{vm.customer.id}},
+                        Name: {{vm.customer.fullName}},
+                        Email: {{vm.customer.email}},
+                        Phone: {{vm.customer.phone}}
+                    </span>
+                </h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-if="vm.customer">
+        <div class="col-md-12" ng-if="vm.customer.addresses.length">
+            <div class="box">
+                <div class="box-header">
+                    <span class="title"><i class="icon-plane"></i> Addresses</span>
+                </div>
+                <div class="box-content">
+                    <table class="table table-normal">
+                        <thead>
+                            <tr>
+                                <th>Backend Id</th>
+                                <th>Country</th>
+                                <th>City</th>
+                                <th>Street</th>
+                                <th>House number</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="address in vm.customer.addresses">
+                                <td>{{address.backendID}}</td>
+                                <td>{{address.country}}</td>
+                                <td>{{address.city}}</td>
+                                <td>{{address.street}}</td>
+                                <td>{{address.houseNumber}} {{address.houseNumberExt}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12" ng-if="vm.customer.orders.length">
+            <div class="box">
+                <div class="box-header">
+                    <span class="title"><i class="icon-plane"></i> Orders</span>
+                </div>
+                <div class="box-content">
+                    <table class="table table-normal">
+                        <thead>
+                            <tr>
+                                <th>Backend Id</th>
+                                <th>Channel</th>
+                                <th>Order Type</th>
+                                <th>Status</th>
+                                <th>Total price</th>
+                                <th>Shipping Costs</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="order in vm.customer.orders">
+                                <td>{{order.backendID}}</td>
+                                <td>{{order.channelIdentifier}}</td>
+                                <td>{{order.orderType}}</td>
+                                <td>{{order.orderStatus}}</td>
+                                <td>{{order.totalPrice}}</td>
+                                <td>{{order.shippingCosts}}</td>
+                                <td>
+                                    <button class="btn btn-green" type="button" ng-click="vm.displayOrderDetails(order.id)">Details</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <span class="title">Notes</span>
+                    <ul class="box-toolbar">
+                        <li>
+                            <span class="label label-blue">{{vm.notes.length}}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="box-content">
+                    <div class="box-section news with-icons" ng-repeat="note in vm.notes">
+                        <div class="avatar purple">
+                            <i class="icon-mobile-phone icon-2x"></i>
+                        </div>
+                        <div class="news-time">
+                            <span>{{note.createdAt| date:'dd'}}</span> {{note.createdAt| date:'MMM'}}
+                        </div>
+                        <div class="news-content">
+                            <div class="news-title">
+                                <a href="">{{note.subject}}</a>
+                            </div>
+                            <div class="news-text">{{note.details}}</div>
+                            <div class="news-text"><strong class="indent">{{note.userName}}</strong></div>
+                        </div>
+                    </div>
+                    <form class="fill-up">
+                        <ul class="padded separate-sections">
+                            <li class="input">
+                                <textarea placeholder="Details" rows="6" ng-model="vm.newNote.details"></textarea>
+                            </li>
+                            <li class="input">
+                                <input type="text" placeholder="Subject" ng-model="vm.newNote.subject" />
+                            </li>
+                            <li class="input">
+                                <button class="btn btn-green" type="button"
+                                        ng-click="vm.createNote()"
+                                        ng-disabled="!(vm.newNote.subject.length >= 1) || !(vm.newNote.details.length >= 1)">
+                                    Add note
+                                </button>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="vm.customerLoaded === false">
+        <div class="col-xs-12">
+            <div class="alert alert-info">
+                Customer {{vm.customerID}} was not found.
+            </div>
+        </div>
+    </div>
+</div>

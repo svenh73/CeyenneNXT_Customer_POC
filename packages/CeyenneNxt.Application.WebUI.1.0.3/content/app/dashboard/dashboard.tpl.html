@@ -1,0 +1,34 @@
+﻿<div class="container">
+    <div class="row ceyenne-top-margin">
+        <div class="col-md-12 action-nav-normal">
+            <div class="row action-nav-row">
+                <div class="col-md-3 action-nav-button">
+                    <a href="#/orders?orderStatus=New" title="New orders">
+                        <i class="icon-signin"></i>
+                        <span>New orders</span>
+                    </a>
+                    <span class="label label-black">{{vm.dashboardData.newOrdersCount}}</span>
+                </div>
+                <div class="col-md-3 action-nav-button">
+                    <a href="#/orders?orderStatus=InProcess" title="Orders in progress">
+                        <i class="icon-road"></i>
+                        <span>Orders in progress</span>
+                    </a>
+                    <span class="label label-danger">{{vm.dashboardData.inProcessOrdersCount}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header">
+                    <span class="title">Orders</span>
+                </div>
+                <div class="box-content padded">
+                    <div class="sine-chart" style="height: 300px;" id="orders-chart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

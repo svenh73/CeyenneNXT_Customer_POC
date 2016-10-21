@@ -35,7 +35,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="CeyenneNxt.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CeyenneNxt.Core.1.0.14\lib\net461\CeyenneNxt.Core.dll</HintPath>
+      <HintPath>..\..\packages\CeyenneNxt.Core.1.0.15\lib\net461\CeyenneNxt.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="CeyenneNxt.Logging.CoreModule, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -147,7 +147,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <Content Include="Content\Base\SiteProduct.css" />
     <Content Include="Content\SiteProduct.css" />
     <Content Include="ReadMe.txt" />
     <Content Include="Views\Product\About.cshtml" />

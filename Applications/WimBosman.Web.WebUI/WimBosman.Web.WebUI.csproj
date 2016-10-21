@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -9,14 +10,13 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6CB6B8EC-0782-4C0F-904F-2EAC9DB660EE}</ProjectGuid>
+    <ProjectGuid>{1634D479-BA05-4058-8279-6675F36FD54F}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WimBosman.Web.WebUI</RootNamespace>
     <AssemblyName>WimBosman.Web.WebUI</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>2.0</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,322 +45,498 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper, Version=5.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CeyenneNxt.Application.WebUI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\CeyenneNxt.Application.WebUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="CeyenneNxt.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CeyenneNxt.Web.WebUI.1.0.5\lib\net461\CeyenneNxt.Core.dll</HintPath>
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\CeyenneNxt.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CeyenneNxt.FileManagement.CoreModule, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\CeyenneNxt.FileManagement.CoreModule.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="CeyenneNxt.Logging.CoreModule, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CeyenneNxt.Web.WebUI.1.0.5\lib\net461\CeyenneNxt.Logging.CoreModule.dll</HintPath>
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\CeyenneNxt.Logging.CoreModule.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CeyenneNxt.Orders.Module, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\CeyenneNxt.Orders.Module.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CeyenneNxt.Orders.Shared, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\CeyenneNxt.Orders.Shared.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="CeyenneNxt.Products.Module, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CeyenneNxt.Web.WebUI.1.0.5\lib\net461\CeyenneNxt.Products.Module.dll</HintPath>
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\CeyenneNxt.Products.Module.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="CeyenneNxt.Products.Shared, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CeyenneNxt.Web.WebUI.1.0.5\lib\net461\CeyenneNxt.Products.Shared.dll</HintPath>
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\CeyenneNxt.Products.Shared.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CeyenneNxt.ServiceBus.CoreModule, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\CeyenneNxt.ServiceBus.CoreModule.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="CeyenneNxt.Settings.CoreModule, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CeyenneNxt.Web.WebUI.1.0.5\lib\net461\CeyenneNxt.Settings.CoreModule.dll</HintPath>
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\CeyenneNxt.Settings.CoreModule.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="CeyenneNxt.Web.WebUI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\CeyenneNxt.Web.WebUI.1.0.5\lib\net461\CeyenneNxt.Web.WebUI.dll</HintPath>
+    <Reference Include="CommonServiceLocator.SimpleInjectorAdapter, Version=2.8.1.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\CommonServiceLocator.SimpleInjectorAdapter.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\Dapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AI.DependencyCollector, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.1.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\Microsoft.AI.DependencyCollector.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.1.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\Microsoft.AI.PerfCounterCollector.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.1.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AI.Web, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.ApplicationInsights.Web.2.1.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\Microsoft.AI.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.AI.WindowsServer, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.ApplicationInsights.WindowsServer.2.1.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\Microsoft.AI.WindowsServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.ApplicationInsights, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.ApplicationInsights.2.1.0\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\Microsoft.ApplicationInsights.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Owin.Security.Facebook, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Owin.Security.Facebook.2.1.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.Google, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Owin.Security.Google.2.1.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    <Reference Include="Microsoft.ServiceBus, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\Microsoft.ServiceBus.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Owin.Security.MicrosoftAccount.2.1.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.Twitter, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Owin.Security.Twitter.2.1.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\Microsoft.WindowsAzure.Configuration.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SimpleInjector, Version=3.2.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SimpleInjector.3.2.2\lib\net45\SimpleInjector.dll</HintPath>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\Ninject.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SimpleInjector.Extensions.ExecutionContextScoping, Version=3.2.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SimpleInjector.Extensions.ExecutionContextScoping.3.2.2\lib\net45\SimpleInjector.Extensions.ExecutionContextScoping.dll</HintPath>
+    <Reference Include="SimpleInjector, Version=3.2.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\SimpleInjector.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SimpleInjector.Integration.Web, Version=3.2.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SimpleInjector.Integration.Web.3.2.2\lib\net40\SimpleInjector.Integration.Web.dll</HintPath>
+    <Reference Include="SimpleInjector.Extensions.ExecutionContextScoping, Version=3.2.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\SimpleInjector.Extensions.ExecutionContextScoping.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SimpleInjector.Integration.Web.Mvc, Version=3.2.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SimpleInjector.Integration.Web.Mvc.3.2.2\lib\net40\SimpleInjector.Integration.Web.Mvc.dll</HintPath>
+    <Reference Include="SimpleInjector.Extensions.LifetimeScoping, Version=3.2.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\SimpleInjector.Extensions.LifetimeScoping.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SimpleInjector.Integration.WebApi, Version=3.2.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SimpleInjector.Integration.WebApi.3.2.2\lib\net45\SimpleInjector.Integration.WebApi.dll</HintPath>
+    <Reference Include="SimpleInjector.Integration.Web, Version=3.2.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\SimpleInjector.Integration.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
+    <Reference Include="SimpleInjector.Integration.Web.Mvc, Version=3.2.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\SimpleInjector.Integration.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.WebApi, Version=3.2.3.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\SimpleInjector.Integration.WebApi.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\System.Net.Http.Formatting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\System.Web.WebPages.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http">
-    </Reference>
-    <Reference Include="System.Net.Http.WebRequest">
-    </Reference>
-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Optimization">
-      <HintPath>..\..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="Antlr3.Runtime">
-      <Private>True</Private>
-      <HintPath>..\..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+      <HintPath>..\..\packages\CeyenneNxt.Application.WebUI.1.0.3\lib\net461\WebGrease.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.Core">
-      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.Owin">
-      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
-      <HintPath>..\..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="Owin">
-      <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin">
-      <HintPath>..\..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb">
-      <HintPath>..\..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security">
-      <HintPath>..\..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.Cookies">
-      <HintPath>..\..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Content\Base\SiteProduct.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
-    <Content Include="ReadMe.txt" />
-    <Content Include="Scripts\ai.0.22.19-build00125.js" />
-    <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\_Config\environment.generic.config">
       <Link>environment.generic.config</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
     </Content>
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\_references.js" />
+    <Content Include="theme\javascripts\vendor\jquery.easy-pie-chart" />
+    <Content Include="theme\fonts\FontAwesome.otf" />
+    <Content Include="theme\fonts\fontawesome-webfont.woff" />
+    <Content Include="theme\fonts\fontawesome-webfont.ttf" />
+    <Content Include="theme\fonts\fontawesome-webfont.eot" />
+    <Content Include="scripts\angular.min.js.map" />
+    <Content Include="scripts\angular-route.min.js.map" />
+    <Content Include="scripts\angular-block-ui.min.js.map" />
+    <Content Include="scripts\angular-block-ui.js.map" />
+    <Content Include="scripts\angular-animate.min.js.map" />
+    <Content Include="content\angular-block-ui.css.map" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\customers\customer-details.tpl.html" />
+    <Content Include="app\customers\customers.tpl.html" />
+    <Content Include="app\dashboard\dashboard.tpl.html" />
+    <Content Include="app\orders\order-details.tpl.html" />
+    <Content Include="app\orders\order-line-details.tpl.html" />
+    <Content Include="app\orders\orders.tpl.html" />
+    <Content Include="app\products\product-details.tpl.html" />
+    <Content Include="app\products\products.tpl.html" />
+    <Content Include="app\refunds\refunds.tpl.html" />
+    <Content Include="content\angular-block-ui.css" />
+    <Content Include="content\angular-block-ui.min.css" />
+    <Content Include="content\angular-toastr.css" />
+    <Content Include="content\angular-toastr.min.css" />
+    <Content Include="content\CeyenneNXT.css" />
+    <Content Include="content\ui-bootstrap-csp.css" />
+    <Content Include="Global.asax" />
+    <Content Include="index.html" />
+    <Content Include="ReadMe.txt" />
+    <Content Include="scripts\ai.0.22.19-build00125.js" />
+    <Content Include="scripts\ai.0.22.19-build00125.min.js" />
+    <Content Include="scripts\angular-animate.js" />
+    <Content Include="scripts\angular-animate.min.js" />
+    <Content Include="scripts\angular-base64.js" />
+    <Content Include="scripts\angular-block-ui.js" />
+    <Content Include="scripts\angular-block-ui.min.js" />
+    <Content Include="scripts\angular-mocks.js" />
+    <Content Include="scripts\angular-route.js" />
+    <Content Include="scripts\angular-route.min.js" />
+    <Content Include="scripts\angular-toastr.js" />
+    <Content Include="scripts\angular-toastr.min.js" />
+    <Content Include="scripts\angular-toastr.tpls.js" />
+    <Content Include="scripts\angular-toastr.tpls.min.js" />
+    <Content Include="scripts\angular-ui\ui-bootstrap-tpls.js" />
+    <Content Include="scripts\angular-ui\ui-bootstrap-tpls.min.js" />
+    <Content Include="scripts\angular-ui\ui-bootstrap.js" />
+    <Content Include="scripts\angular-ui\ui-bootstrap.min.js" />
+    <Content Include="scripts\angular.js" />
+    <Content Include="scripts\angular.min.js" />
+    <Content Include="scripts\ngStorage.js" />
+    <Content Include="scripts\ngStorage.min.js" />
+    <Content Include="scripts\oidc-angular.js" />
+    <Content Include="theme\fonts\fontawesome-webfont.svg" />
+    <Content Include="theme\images\avatars\avatar1.jpg" />
+    <Content Include="theme\images\avatars\avatar2.jpg" />
+    <Content Include="theme\images\avatars\avatar3.jpg" />
+    <Content Include="theme\images\avatars\avatar4.jpg" />
+    <Content Include="theme\images\avatars\avatar5.png" />
+    <Content Include="theme\images\bg.png" />
+    <Content Include="theme\images\blue%402x.png" />
+    <Content Include="theme\images\blue.png" />
+    <Content Include="theme\images\clear.png" />
+    <Content Include="theme\images\core_admin.png" />
+    <Content Include="theme\images\core_admin_small.png" />
+    <Content Include="theme\images\groups.png" />
+    <Content Include="theme\images\ie-spacer.gif" />
+    <Content Include="theme\images\loading.gif" />
+    <Content Include="theme\images\select2-spinner.gif" />
+    <Content Include="theme\images\select2.png" />
+    <Content Include="theme\images\select2x2.png" />
+    <Content Include="theme\javascripts\application.js" />
+    <Content Include="theme\javascripts\calendar.js" />
+    <Content Include="theme\javascripts\charts\horizontal_bar_charts.js" />
+    <Content Include="theme\javascripts\charts\sparkline_samples.js" />
+    <Content Include="theme\javascripts\charts\xcharts_bar.js" />
+    <Content Include="theme\javascripts\charts\xcharts_left_sine.js" />
+    <Content Include="theme\javascripts\charts\xcharts_sine.js" />
+    <Content Include="theme\javascripts\generic.js" />
+    <Content Include="theme\javascripts\gritter.js" />
+    <Content Include="theme\javascripts\vendor\bootstrap-datepicker.js" />
+    <Content Include="theme\javascripts\vendor\bootstrap-editable.js" />
+    <Content Include="theme\javascripts\vendor\bootstrap-wysihtml5.js" />
+    <Content Include="theme\javascripts\vendor\bootstrap\affix.js" />
+    <Content Include="theme\javascripts\vendor\bootstrap\alert.js" />
+    <Content Include="theme\javascripts\vendor\bootstrap\bootstrap.js" />
+    <Content Include="theme\javascripts\vendor\bootstrap\button.js" />
+    <Content Include="theme\javascripts\vendor\bootstrap\carousel.js" />
+    <Content Include="theme\javascripts\vendor\bootstrap\collapse.js" />
+    <Content Include="theme\javascripts\vendor\bootstrap\dropdown.js" />
+    <Content Include="theme\javascripts\vendor\bootstrap\modal.js" />
+    <Content Include="theme\javascripts\vendor\bootstrap\popover.js" />
+    <Content Include="theme\javascripts\vendor\bootstrap\scrollspy.js" />
+    <Content Include="theme\javascripts\vendor\bootstrap\tab.js" />
+    <Content Include="theme\javascripts\vendor\bootstrap\tooltip.js" />
+    <Content Include="theme\javascripts\vendor\bootstrap\transition.js" />
+    <Content Include="theme\javascripts\vendor\bootstrap_wysihtml5\bootstrap-wysihtml5.js" />
+    <Content Include="theme\javascripts\vendor\bootstrap_wysihtml5\wysihtml5-0.3.0.js" />
+    <Content Include="theme\javascripts\vendor\d3.js" />
+    <Content Include="theme\javascripts\vendor\dataTables.js" />
+    <Content Include="theme\javascripts\vendor\editable\address_editable.js" />
+    <Content Include="theme\javascripts\vendor\editable\bootstrap-editable.js" />
+    <Content Include="theme\javascripts\vendor\editable\editable_demo.js" />
+    <Content Include="theme\javascripts\vendor\editable\moment.js" />
+    <Content Include="theme\javascripts\vendor\excanvas.js" />
+    <Content Include="theme\javascripts\vendor\fullcalendar\calendar_events.js" />
+    <Content Include="theme\javascripts\vendor\fullcalendar\fullcalendar.js" />
+    <Content Include="theme\javascripts\vendor\fullcalendar\gcal.js" />
+    <Content Include="theme\javascripts\vendor\html5shiv.js" />
+    <Content Include="theme\javascripts\vendor\ibutton.js" />
+    <Content Include="theme\javascripts\vendor\ibutton\jquery.easing.1.3.js" />
+    <Content Include="theme\javascripts\vendor\ibutton\jquery.ibutton.js" />
+    <Content Include="theme\javascripts\vendor\ibutton\jquery.metadata.js" />
+    <Content Include="theme\javascripts\vendor\jquery.icheck.js" />
+    <Content Include="theme\javascripts\vendor\jquery191.js" />
+    <Content Include="theme\javascripts\vendor\jqueryui1102.js" />
+    <Content Include="theme\javascripts\vendor\jquery_browser.js" />
+    <Content Include="theme\javascripts\vendor\jquery_gritter.js" />
+    <Content Include="theme\javascripts\vendor\jquery_uniform.js" />
+    <Content Include="theme\javascripts\vendor\justgage.js" />
+    <Content Include="theme\javascripts\vendor\justgage\justgage.1.0.1.js" />
+    <Content Include="theme\javascripts\vendor\justgage\raphael.2.1.0.min.js" />
+    <Content Include="theme\javascripts\vendor\responsive-tables.js" />
+    <Content Include="theme\javascripts\vendor\select2.js" />
+    <Content Include="theme\javascripts\vendor\sparkline.js" />
+    <Content Include="theme\javascripts\vendor\tags_input.js" />
+    <Content Include="theme\javascripts\vendor\touchTouch.js" />
+    <Content Include="theme\javascripts\vendor\validation\jquery.validationEngine-en.js" />
+    <Content Include="theme\javascripts\vendor\validation\jquery.validationEngine.js" />
+    <Content Include="theme\javascripts\vendor\wizard\bootstrap-wizard.js" />
+    <Content Include="theme\javascripts\vendor\wizard\wizard_demo.js" />
+    <Content Include="theme\javascripts\vendor\xcharts.js" />
+    <Content Include="theme\pages\charts\charts.html" />
+    <Content Include="theme\pages\dashboard\dashboard.html" />
+    <Content Include="theme\pages\forms\forms.html" />
+    <Content Include="theme\pages\other\error404.html" />
+    <Content Include="theme\pages\other\full_calendar.html" />
+    <Content Include="theme\pages\other\login.html" />
+    <Content Include="theme\pages\other\sign_up.html" />
+    <Content Include="theme\pages\other\wizard.html" />
+    <Content Include="theme\pages\ui_lab\buttons.html" />
+    <Content Include="theme\pages\ui_lab\general.html" />
+    <Content Include="theme\pages\ui_lab\grid.html" />
+    <Content Include="theme\pages\ui_lab\icons.html" />
+    <Content Include="theme\pages\ui_lab\tables.html" />
+    <Content Include="theme\pages\ui_lab\widgets.html" />
+    <Content Include="theme\stylesheets\accordion.css" />
+    <Content Include="theme\stylesheets\action_nav.css" />
+    <Content Include="theme\stylesheets\application.css" />
+    <Content Include="theme\stylesheets\badges.css" />
+    <Content Include="theme\stylesheets\base.css" />
+    <Content Include="theme\stylesheets\bootstrap-editable-fix.css" />
+    <Content Include="theme\stylesheets\bootstrap-editable.css" />
+    <Content Include="theme\stylesheets\bootstrap-wizard.css" />
+    <Content Include="theme\stylesheets\bootstrap-wysihtml5.css" />
+    <Content Include="theme\stylesheets\bootstrap_alerts.css" />
+    <Content Include="theme\stylesheets\bootstrap_include.css" />
+    <Content Include="theme\stylesheets\box.css" />
+    <Content Include="theme\stylesheets\breadcrumbs.css" />
+    <Content Include="theme\stylesheets\buttons.css" />
+    <Content Include="theme\stylesheets\charts.css" />
+    <Content Include="theme\stylesheets\chat-box.css" />
+    <Content Include="theme\stylesheets\content_progress.css" />
+    <Content Include="theme\stylesheets\dataTables.css" />
+    <Content Include="theme\stylesheets\dropdowns.css" />
+    <Content Include="theme\stylesheets\easy_pie_chart.css" />
+    <Content Include="theme\stylesheets\error_pages.css" />
+    <Content Include="theme\stylesheets\font-awesome-mixins.css" />
+    <Content Include="theme\stylesheets\font-awesome.css" />
+    <Content Include="theme\stylesheets\form_elements.css" />
+    <Content Include="theme\stylesheets\fullcalendar.css" />
+    <Content Include="theme\stylesheets\gritter.css" />
+    <Content Include="theme\stylesheets\ibutton.css" />
+    <Content Include="theme\stylesheets\icheck_blue.css" />
+    <Content Include="theme\stylesheets\justgage.css" />
+    <Content Include="theme\stylesheets\message_box.css" />
+    <Content Include="theme\stylesheets\mixin_helpers.css" />
+    <Content Include="theme\stylesheets\modal.css" />
+    <Content Include="theme\stylesheets\navigation.css" />
+    <Content Include="theme\stylesheets\news.css" />
+    <Content Include="theme\stylesheets\numeric_stats.css" />
+    <Content Include="theme\stylesheets\pagination.css" />
+    <Content Include="theme\stylesheets\responsive-tables.css" />
+    <Content Include="theme\stylesheets\responsive480.css" />
+    <Content Include="theme\stylesheets\responsive768.css" />
+    <Content Include="theme\stylesheets\responsive992.css" />
+    <Content Include="theme\stylesheets\scrollable.css" />
+    <Content Include="theme\stylesheets\select2.css" />
+    <Content Include="theme\stylesheets\select2_overrides.css" />
+    <Content Include="theme\stylesheets\sidebar.css" />
+    <Content Include="theme\stylesheets\sparkline_box.css" />
+    <Content Include="theme\stylesheets\stats.css" />
+    <Content Include="theme\stylesheets\tables.css" />
+    <Content Include="theme\stylesheets\tags.css" />
+    <Content Include="theme\stylesheets\thumbnails.css" />
+    <Content Include="theme\stylesheets\tooltips.css" />
+    <Content Include="theme\stylesheets\touchTouch.css" />
+    <Content Include="theme\stylesheets\triangle_button.css" />
+    <Content Include="theme\stylesheets\ui_custom.css" />
+    <Content Include="theme\stylesheets\uniform_default.css" />
+    <Content Include="theme\stylesheets\validation_engine.css" />
+    <Content Include="theme\stylesheets\variables.css" />
+    <Content Include="theme\stylesheets\xcharts.css" />
     <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\Shared\_ViewStart.cshtml" />
-    <Content Include="Views\Base\Product\About.cshtml" />
-    <Content Include="Views\Base\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Base\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Base\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Base\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Base\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Base\Account\Login.cshtml" />
-    <Content Include="Views\Base\Account\Register.cshtml" />
-    <Content Include="Views\Base\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Base\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Base\Account\SendCode.cshtml" />
-    <Content Include="Views\Base\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Base\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Base\Home\About.cshtml" />
-    <Content Include="Views\Base\Home\Contact.cshtml" />
-    <Content Include="Views\Base\Home\Index.cshtml" />
-    <Content Include="Views\Base\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Base\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Base\Manage\Index.cshtml" />
-    <Content Include="Views\Base\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Base\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Base\Manage\VerifyPhoneNumber.cshtml" />
-    <Content Include="Views\Base\Shared\Error.cshtml" />
-    <Content Include="Views\Base\Shared\Lockout.cshtml" />
-    <Content Include="Views\Base\Shared\_Layout.cshtml" />
-    <Content Include="Views\Base\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="packages.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <None Include="Project_Readme.html" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <TypeScriptCompile Include="app\app.config.ts" />
+    <TypeScriptCompile Include="app\app.constants.ts" />
+    <TypeScriptCompile Include="app\app.ts" />
+    <TypeScriptCompile Include="app\customers\customer-details.controller.ts" />
+    <TypeScriptCompile Include="app\customers\customers.controller.ts" />
+    <TypeScriptCompile Include="app\customers\customers.module.ts" />
+    <TypeScriptCompile Include="app\dashboard\dashboard.controller.ts" />
+    <TypeScriptCompile Include="app\dashboard\dashboard.module.ts" />
+    <TypeScriptCompile Include="app\main.controller.ts" />
+    <TypeScriptCompile Include="app\orders\order-details.controller.ts" />
+    <TypeScriptCompile Include="app\orders\order-line-details.controller.ts" />
+    <TypeScriptCompile Include="app\orders\orders.controller.ts" />
+    <TypeScriptCompile Include="app\orders\orders.module.ts" />
+    <TypeScriptCompile Include="app\products\product-details.controller.ts" />
+    <TypeScriptCompile Include="app\products\products.controller.ts" />
+    <TypeScriptCompile Include="app\products\products.module.ts" />
+    <TypeScriptCompile Include="app\refunds\refunds.controller.ts" />
+    <TypeScriptCompile Include="app\refunds\refunds.module.ts" />
+    <TypeScriptCompile Include="app\services\auth-interceptor.service.ts" />
+    <TypeScriptCompile Include="app\services\customer-note.service.ts" />
+    <TypeScriptCompile Include="app\services\customer.service.ts" />
+    <TypeScriptCompile Include="app\services\exception-handler.provider.ts" />
+    <TypeScriptCompile Include="app\services\order-line.service.ts" />
+    <TypeScriptCompile Include="app\services\order-note.service.ts" />
+    <TypeScriptCompile Include="app\services\order-remarks.service.ts" />
+    <TypeScriptCompile Include="app\services\order-status.service.ts" />
+    <TypeScriptCompile Include="app\services\order.service.ts" />
+    <TypeScriptCompile Include="app\services\page.service.ts" />
+    <TypeScriptCompile Include="app\services\product.service.ts" />
+    <TypeScriptCompile Include="app\services\refund-statuses.service.ts" />
+    <TypeScriptCompile Include="app\services\refund.service.ts" />
+    <TypeScriptCompile Include="app\services\responseErrorHandler.service.ts" />
+    <TypeScriptCompile Include="app\services\services.module.ts" />
+    <TypeScriptCompile Include="app\services\stock.service.ts" />
+    <TypeScriptCompile Include="app\typings\classes.d.ts" />
+    <TypeScriptCompile Include="app\typings\enums.ts" />
+    <TypeScriptCompile Include="app\typings\typings.ts" />
+    <TypeScriptCompile Include="scripts\typings\angular-toastr\angular-toastr.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\angularjs\angular-animate.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\angularjs\angular-component-router.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\angularjs\angular-cookies.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\angularjs\angular-mocks.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\angularjs\angular-resource.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\angularjs\angular-route.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\angularjs\angular-sanitize.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\angularjs\angular.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="scripts\typings\ngstorage\ngstorage.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
-  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
-    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
-  </Target>
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>49305</DevelopmentServerPort>
+          <DevelopmentServerPort>11019</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49305/</IISUrl>
+          <IISUrl>http://localhost:11019/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -376,10 +553,11 @@
     <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
-  </Target> -->
+  </Target>
+  -->
 </Project>
